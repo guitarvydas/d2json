@@ -1,6 +1,4 @@
-all: firsttime
-
-firsttime: \
+QUERIES=\
 layer4_query.bash \
 layer5_query.bash \
 layer6_query.bash \
@@ -16,7 +14,13 @@ layerkind_query.bash \
 layername_query.bash \
 layersynccode_query.bash
 
-build: firsttime top.asc hello.asc world.asc helloworld.asc
+
+all: firsttime
+
+
+firsttime: $(QUERIES)
+
+build: firsttime top.asc hello.asc world.asc helloworld.asc $(QUERIES)
 	./build.bash ..
 
 clean:
