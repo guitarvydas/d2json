@@ -11,7 +11,9 @@ infile=$2
 
 ${root}/d2f/d2f.bash ${root} ${infile} >fb.pl
 # from this point on, we can ignore ${infile} since it's been converted to fb.pl
-${root}/das2f/run-fb-pipeline.bash ${root} 2>/dev/null
+${root}/das2f/run-fb-pipeline.bash ${root} #2>/dev/null
 ${root}/das2j/layercomponent_query.bash >out.json
+echo
 echo 'out.json written'
+echo
 
