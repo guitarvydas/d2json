@@ -18,9 +18,11 @@ layersynccode_query.bash
 all: firsttime
 
 
-firsttime: $(QUERIES)
+firsttime: build
 
-build: firsttime top.asc hello.asc world.asc helloworld.asc $(QUERIES)
+build: $(QUERIES)
+
+$(QUERIES) :
 	./build.bash ..
 
 clean:
