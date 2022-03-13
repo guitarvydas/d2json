@@ -1,20 +1,17 @@
 #!/bin/bash
-#clear
-ductA=/tmp/ductA_${RANDOM}
-ductB=/tmp/ductB_${RANDOM}
-ductC=/tmp/ductC_${RANDOM}
-ductD=/tmp/ductD_${RANDOM}
-ductE=/tmp/ductE_${RANDOM}
-root=`realpath ../`
+# usage: generate.bash <tools root directory> <.drawio file>
+#                      $1                     $2
+clear
 
-echo $root >$ductA
-echo $1 >$ductB
-realpath ./d2f.comp >$ductC
-realpath ./das2f.comp >$ductD
-realpath ./das2j.comp >$ductE
+# tools root - takes the place of $PATH
+# change this for your own environment
+root=`realpath $1`
 
-./das2py.comp 3<$ductA 4<$ductB 5<$ductC 6<$ductD 7<$ductE &
-pid1=$!
-wait $pid
+infile=$2
 
-rm -f $ductA $ductB $ductC $ductD $ductE
+${root}/d2f/d2f.bash ${root} ${infile} >fb.pl
+# from this point on, we can ignore ${infile} since it's been converted to fb.pl
+${root}/das2f/run-fb-pipeline.bash ${root} 2>/dev/null
+${root}/das2j/layercomponent_query.bash >out.json
+echo 'out.json written'
+

@@ -4,7 +4,10 @@ NODEMODULES=\
 	../node_modules/atob \
 	../node_modules/pako
 
-all: $(NODEMODULES) build exec
+# change this for your own environment
+TOOLS=~/projects
+
+all: $(NODEMODULES) tools helloworld.json
 
 ../node_modules/ohm-js:
 	(cd .. ; npm install ohm-js)
@@ -22,8 +25,8 @@ tools:
 	(cd ../das2f ; make)
 	(cd ../das2j ; make)
 
-helloworld.json : helloworld.drawio
-	./generate.bash helloworld.drawio
+helloworld.json : tools helloworld.drawio
+	./generate.bash $(TOOLS) helloworld.drawio
 
 clean:
 	(cd ../dr ; make clean)
