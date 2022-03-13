@@ -5,7 +5,7 @@ NODEMODULES=\
 	node_modules/pako
 
 # change this for your own environment
-TOOLS=~/projects
+TOOLS=.
 
 all: $(NODEMODULES) tools helloworld.json
 
