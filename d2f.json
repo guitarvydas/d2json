@@ -122,7 +122,7 @@
       "inputs": ["in" ],
       "name":"styleexpander",
       "outputs": ["out" ],
-      "synccode":"var x = sfstylexpander (message.data);&lt;br&gt;me.send (&quot;out&quot;, x, message);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
+      "synccode":"var x = sfstyleexpander (message.data);&lt;br&gt;me.send (&quot;out&quot;, x, message);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
     }
   ],
   [

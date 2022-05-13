@@ -234,7 +234,7 @@ var styleexpander_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = sfstylexpander (message.data);
+        var x = sfstyleexpander (message.data);
 me.send ("out", x, message);
 
 
