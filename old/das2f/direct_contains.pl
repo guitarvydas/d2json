@@ -1,6 +1,6 @@
 direct_contains(Direct):-
-    setof([G,H],indirect_contains(G,H),Indirect).
-    setof([J,K],contains(J,K),All).
+    setof([G,H],indirect_contains(G,H),Indirect),
+    setof([J,K],contains(J,K),All),
     subtract(All,Indirect,Direct).
 
 indirect_contains(X,Y):-

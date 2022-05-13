@@ -1,7 +1,7 @@
 #!/bin/bash
 # usage: generate.bash <tools root directory> <.drawio file>
 #                      $1                     $2
-clear
+#clear
 
 # tools root - takes the place of $PATH
 # change this for your own environment

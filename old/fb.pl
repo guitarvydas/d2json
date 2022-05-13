@@ -139,7 +139,7 @@ diagram_fact(value, cell_13, "print (&quot;world&quot;)&lt;br&gt;&lt;div&gt;&lt;
 diagram_fact(value, cell_15, "go").
 diagram_fact(value, cell_16, "a").
 diagram_fact(value, cell_6, "helloworld").
-diagram_fact(value, cell_7, "hello").
+diagram_fact(value, cell_7, "uncompress").
 diagram_fact(value, cell_8, "print (&quot;hello&quot;)&lt;br&gt;self.send (&quot;out&quot;, True)&lt;br&gt;&lt;div&gt;&lt;/div&gt;").
 diagram_fact(vertex, cell_10, 1).
 diagram_fact(vertex, cell_11, 1).
@@ -209,7 +209,7 @@ das_fact(name, cell_13, "print (&quot;world&quot;)&lt;br&gt;&lt;div&gt;&lt;/div&
 das_fact(name, cell_15, "go").
 das_fact(name, cell_16, "a").
 das_fact(name, cell_6, "helloworld").
-das_fact(name, cell_7, "hello").
+das_fact(name, cell_7, "uncompress").
 das_fact(name, cell_8, "print (&quot;hello&quot;)&lt;br&gt;self.send (&quot;out&quot;, True)&lt;br&gt;&lt;div&gt;&lt;/div&gt;").
 das_fact(color,cell_10,"yellow").
 das_fact(color,cell_11,"-").
@@ -282,21 +282,5 @@ das_fact(indirect_contains,cell_6,cell_12).
 das_fact(indirect_contains,cell_6,cell_8).
 das_fact(indirect_contains,cell_6,cell_10).
 das_fact(indirect_contains,cell_6,cell_16).
-das_fact(direct_contains,cell_11,cell_12).
-das_fact(direct_contains,cell_11,cell_13).
-das_fact(direct_contains,cell_6,cell_11).
-das_fact(direct_contains,cell_6,cell_15).
-das_fact(direct_contains,cell_6,cell_7).
-das_fact(direct_contains,cell_7,cell_10).
-das_fact(direct_contains,cell_7,cell_16).
-das_fact(direct_contains,cell_7,cell_8).
-das_fact(direct_contains,cell_6,cell_9).
-das_fact(direct_contains,cell_6,cell_14).
 das_fact(codebox,cell_13,"print (&quot;world&quot;)&lt;br&gt;&lt;div&gt;&lt;/div&gt;").
 das_fact(codebox,cell_8,"print (&quot;hello&quot;)&lt;br&gt;self.send (&quot;out&quot;, True)&lt;br&gt;&lt;div&gt;&lt;/div&gt;").
-das_fact(connection, cell_6, cell_14).
-das_fact(sender, cell_14, sender{component:helloworld,port:go}).
-das_fact(receiver, cell_14, receiver{component:hello,port:a}).
-das_fact(connection, cell_6, cell_9).
-das_fact(sender, cell_9, sender{component:hello,port:out}).
-das_fact(receiver, cell_9, receiver{component:world,port:in}).
