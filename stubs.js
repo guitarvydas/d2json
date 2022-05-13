@@ -27,3 +27,11 @@ function styleexpander (xml) {
 function uncompress (rawdrawio) {
     return rawdrawio;
 }
+
+function main () {
+    argv = require('yargs/yargs')(process.argv.slice(2)).argv;
+    console.log (argv);
+}    
+
+
+main ();
