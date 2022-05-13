@@ -1,25 +1,31 @@
 
 function sfdiagramparser (xml) {
+    console.log ('sfdiagramparser');
     return xml;
 }
 
 function sfasfactbase (xml1) {
+    console.log ('sfasfactbase');
     return xml1;
 }
 
 function sfdeleteblanklines (text) {
+    console.log ('sfdeleteblanklines');
     return text;
 }
 
 function sfsortForPROLOG (text) {
+    console.log ('sfsortForPROLOG');
     return text;
 }
 
 function sfdeleteTrailingSugar (text) {
+    console.log ('sfdeleteTrailingSugar');
     return text;
 }
 
 function sfstyleexpander (xml) {
+    console.log ('sfstyleexpander');
     return xml;
 }
 
