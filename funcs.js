@@ -33,6 +33,8 @@ function sfuncompress (rawdrawio) {
 }
 
 function sfreadfile (fname) {
+    console.log ('sfreadfile');
+    console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
     return bytes;
 }

@@ -433,8 +433,8 @@ var diagramparser_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = diagramparser (message.in);
-this.send ("out", x, message);
+        var x = sfdiagramparser (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -460,8 +460,8 @@ var asfactbase_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = asfactbase (message.in);
-this.send ("out", x, message);
+        var x = sfasfactbase (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -487,8 +487,8 @@ var deleteblanklines_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = deleteblanklines (message.in);
-this.send ("out", x, message);
+        var x = sfdeleteblanklines (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -514,8 +514,8 @@ var sortForPROLOG_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = sortForPROLOG (message.in);
-this.send ("out", x, message);
+        var x = sfsortForPROLOG (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -541,8 +541,8 @@ var deleteTrailingSugar_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = deleteTrailingSugar (message.in);
-this.send ("out", x, message);
+        var x = sfdeleteTrailingSugar (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -568,8 +568,8 @@ var kickStart_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var rawbinary = readfile (argv[0]);
-this.send ("out", rawbinary, null);
+        var rawbinary = sfreadfile (argv._[0]);
+me.send ("out", rawbinary, null);
 
 
     }
@@ -654,8 +654,8 @@ var styleexpander_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = stylexpander (message.in);
-this.send ("out", x, message);
+        var x = sfstylexpander (message.data);
+me.send ("out", x, message);
 
 
     }
@@ -681,8 +681,8 @@ var uncompress_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var u = uncompress (message.in);
-this.send ("out", u, message);
+        var u = sfuncompress (message.data);
+me.send ("out", u, message);
 
 
     }
@@ -729,6 +729,8 @@ function sfuncompress (rawdrawio) {
 }
 
 function sfreadfile (fname) {
+    console.log ('sfreadfile');
+    console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
     return bytes;
 }
@@ -738,8 +740,15 @@ function main () {
     // don't edit this, edit post.js instead
     argv = require('yargs/yargs')(process.argv.slice(2)).argv;
     console.log (argv);
-    console.log ('main');
+    console.log ('main A');
     var d = new d2f (null, "d2f top");
+    console.log ('main B');
+    var kstart = d.lookupChild ("kickStart");
+    console.log ('main C');
+    kstart.handler (kstart, null);
+    console.log ('main D');
+    kstart.container.wakeup ();
+    console.log ('main E');
           // htmlbutton.handler (htmlbutton, null);
           // htmlbutton.container.wakeup ();
           // let outs = testBench.outputs ();
