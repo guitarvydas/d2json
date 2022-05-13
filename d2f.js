@@ -121,7 +121,7 @@ var deleteTrailingSugar_protoImplementation = {
     begin: function () {},
     finish: function () {},
     handler: function (me, message) {
-        var x = deleteTrailingSugart (message.in);
+        var x = deleteTrailingSugar (message.in);
 this.send ("out", x, message);
 
 
@@ -135,9 +135,36 @@ function deleteTrailingSugar (container, instancename) {
 
 
 
+var kickStart_signature = {
+    name: "kickStart",
+    inputs: [],
+    outputs: [{name:"out", structure:["out"]}]
+}
+
+
+var kickStart_protoImplementation = {
+    name: "kickStart",
+    kind: "leaf",
+    begin: function () {},
+    finish: function () {},
+    handler: function (me, message) {
+        var rawbinary = readfile (argv[0]);
+this.send ("out", rawbinary, null);
+
+
+    }
+}
+
+function kickStart (container, instancename) {
+    let me = new Leaf (kickStart_signature, kickStart_protoImplementation, container, instancename);
+    return me;
+}
+
+
+
 var d2f_signature = {
     name: "d2f",
-    inputs: [{name:"in", structure:["in"]}],
+    inputs: [],
     outputs: []
 }
 
@@ -149,21 +176,22 @@ function d2f_makechildren (container) {
         var child3 = new deleteblanklines (container, "deleteblanklines");
         var child4 = new sortForPROLOG (container, "sortForPROLOG");
         var child5 = new deleteTrailingSugar (container, "deleteTrailingSugar");
-        var child6 = new styleexpander (container, "styleexpander");
-        var child7 = new uncompress (container, "uncompress");
-      var children = [ {name: "diagramparser", runnable: child1}, {name: "asfactbase", runnable: child2}, {name: "deleteblanklines", runnable: child3}, {name: "sortForPROLOG", runnable: child4}, {name: "deleteTrailingSugar", runnable: child5}, {name: "styleexpander", runnable: child6}, {name: "uncompress", runnable: child7} ];
+        var child6 = new kickStart (container, "kickStart");
+        var child7 = new styleexpander (container, "styleexpander");
+        var child8 = new uncompress (container, "uncompress");
+      var children = [ {name: "diagramparser", runnable: child1}, {name: "asfactbase", runnable: child2}, {name: "deleteblanklines", runnable: child3}, {name: "sortForPROLOG", runnable: child4}, {name: "deleteTrailingSugar", runnable: child5}, {name: "kickStart", runnable: child6}, {name: "styleexpander", runnable: child7}, {name: "uncompress", runnable: child8} ];
       return children;
 }
 
 function d2f_makeconnections (container) {
-    var conn8 = {sender:{name: "uncompress", etag: "out"}, net: "NIY", receivers:  [{name: "diagramparser", etag: "in"}] };
-    var conn9 = {sender:{name: "_me", etag: "in"}, net: "NIY", receivers:  [{name: "uncompress", etag: "in"}] };
+    var conn9 = {sender:{name: "uncompress", etag: "out"}, net: "NIY", receivers:  [{name: "diagramparser", etag: "in"}] };
     var conn10 = {sender:{name: "diagramparser", etag: "out"}, net: "NIY", receivers:  [{name: "styleexpander", etag: "in"}] };
     var conn11 = {sender:{name: "styleexpander", etag: "out"}, net: "NIY", receivers:  [{name: "asfactbase", etag: "in"}] };
     var conn12 = {sender:{name: "asfactbase", etag: "out"}, net: "NIY", receivers:  [{name: "deleteblanklines", etag: "in"}] };
     var conn13 = {sender:{name: "deleteblanklines", etag: "out"}, net: "NIY", receivers:  [{name: "sortForPROLOG", etag: "in"}] };
     var conn14 = {sender:{name: "sortForPROLOG", etag: "out"}, net: "NIY", receivers:  [{name: "deleteTrailingSugar", etag: "in"}] };
-    var connections = [ conn8, conn9, conn10, conn11, conn12, conn13, conn14 ];
+    var conn15 = {sender:{name: "kickStart", etag: "out"}, net: "NIY", receivers:  [{name: "uncompress", etag: "in"}] };
+    var connections = [ conn9, conn10, conn11, conn12, conn13, conn14, conn15 ];
     return connections;
 }
 

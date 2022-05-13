@@ -3,7 +3,7 @@
     {
       "children": [],
       "connections": [],
-      "id":"cell_15",
+      "id":"cell_13",
       "inputs": ["in" ],
       "name":"diagramparser",
       "outputs": ["out" ],
@@ -14,7 +14,7 @@
     {
       "children": [],
       "connections": [],
-      "id":"cell_24",
+      "id":"cell_22",
       "inputs": ["in" ],
       "name":"asfactbase",
       "outputs": ["out" ],
@@ -25,7 +25,7 @@
     {
       "children": [],
       "connections": [],
-      "id":"cell_29",
+      "id":"cell_27",
       "inputs": ["in" ],
       "name":"deleteblanklines",
       "outputs": ["out" ],
@@ -36,7 +36,7 @@
     {
       "children": [],
       "connections": [],
-      "id":"cell_34",
+      "id":"cell_32",
       "inputs": ["in" ],
       "name":"sortForPROLOG",
       "outputs": ["out" ],
@@ -47,24 +47,40 @@
     {
       "children": [],
       "connections": [],
-      "id":"cell_39",
+      "id":"cell_37",
       "inputs": ["in" ],
       "name":"deleteTrailingSugar",
       "outputs": [],
-      "synccode":"var x = deleteTrailingSugart (message.in);&lt;br&gt;this.send (&quot;out&quot;, x, message);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
+      "synccode":"var x = deleteTrailingSugar (message.in);&lt;br&gt;this.send (&quot;out&quot;, x, message);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
     }
   ],
   [
     {
-      "children": ["diagramparser", "asfactbase", "deleteblanklines", "sortForPROLOG", "deleteTrailingSugar", "styleexpander", "uncompress" ],
+      "children": [],
+      "connections": [],
+      "id":"cell_40",
+      "inputs": [],
+      "name":"kickStart",
+      "outputs": ["out" ],
+      "synccode":"var rawbinary = readfile (argv[0]);&lt;br&gt;this.send (&quot;out&quot;, rawbinary, null);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
+    }
+  ],
+  [
+    {
+      "children": [
+	"diagramparser",
+	"asfactbase",
+	"deleteblanklines",
+	"sortForPROLOG",
+	"deleteTrailingSugar",
+	"kickStart",
+	"styleexpander",
+	"uncompress"
+      ],
       "connections": [
 	{
 	  "receivers": [ {"receiver": {"component":"diagramparser", "port":"in"}} ],
 	  "senders": [ {"sender": {"component":"uncompress", "port":"out"}} ]
-	},
-	{
-	  "receivers": [ {"receiver": {"component":"uncompress", "port":"in"}} ],
-	  "senders": [ {"sender": {"component":"d2f", "port":"in"}} ]
 	},
 	{
 	  "receivers": [ {"receiver": {"component":"styleexpander", "port":"in"}} ],
@@ -85,10 +101,14 @@
 	{
 	  "receivers": [ {"receiver": {"component":"deleteTrailingSugar", "port":"in"}} ],
 	  "senders": [ {"sender": {"component":"sortForPROLOG", "port":"out"}} ]
+	},
+	{
+	  "receivers": [ {"receiver": {"component":"uncompress", "port":"in"}} ],
+	  "senders": [ {"sender": {"component":"kickStart", "port":"out"}} ]
 	}
       ],
       "id":"cell_6",
-      "inputs": ["in" ],
+      "inputs": [],
       "name":"d2f",
       "outputs": [],
       "synccode":""
