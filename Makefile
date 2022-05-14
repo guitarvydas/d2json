@@ -5,7 +5,7 @@ support=--support=${cwd}/support.js
 all: example
 
 example: clean main.js
-	node main.js d2f.drawio
+	node main.js d2f.drawio 2>/tmp/d2f.json
 
 main: main.js
 	node main.js d2f.drawio
