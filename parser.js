@@ -1,14 +1,12 @@
-#!/usr/bin/env node
 //'use strict'
 
 
-const fs = require ('fs');
 var argv;
 
 var reTrigger;
 var reEnd;
 var stop;
-
+var cycles = 0;
 
 var viewGeneratedCode = false;
 var tracing = false;
@@ -420,47 +418,55 @@ function pre (allchars) {
     return expanded;
 }
 
-function main () {
-    argv = require('yargs/yargs')(process.argv.slice(2)).argv;
-    var fname;
-    if (argv.input) {
-	fname = argv.input;
-    } else {
-	fname = '/dev/fd/0';
-    }
-    cycles = 0;
-    if (argv.stop) {
-	stop = argv.stop;
-    } else {
-	stop = undefined;
-    }
-    if (argv.view) {
-	viewGeneratedCode = true;
-    } else {
-	viewGeneratedCode = false;
-    }
-    if (argv.trace) {
-	tracing = true;
-	traceDepth = 0;
-    } else {
-	tracing = false;
-    }
-    var allchars = fs.readFileSync (fname, 'utf-8');
-    var result = pre (allchars);
-    emit (result);
-}
-function emit (s) {
-    console.log (s);
+function prep (text, grammarfilename, semanticsfilename, supportfilename, stopcount) {
+    argv._ = ['.', '$', grammarfilename, semanticsfilename];
+    argv.support = supportfilename;
+    argv.errorview = true;
+    stop=stopcount;
+    return pre (text)
 }
 
-function getargv (s) {
-    let r = argv[s];
-    if (r) {
-	return r;
-    } else {
-	return "";
-    }
-}
+// function main () {
+//     argv = require('yargs/yargs')(process.argv.slice(2)).argv;
+//     var fname;
+//     if (argv.input) {
+// 	fname = argv.input;
+//     } else {
+// 	fname = '/dev/fd/0';
+//     }
+//     cycles = 0;
+//     if (argv.stop) {
+// 	stop = argv.stop;
+//     } else {
+// 	stop = undefined;
+//     }
+//     if (argv.view) {
+// 	viewGeneratedCode = true;
+//     } else {
+// 	viewGeneratedCode = false;
+//     }
+//     if (argv.trace) {
+// 	tracing = true;
+// 	traceDepth = 0;
+//     } else {
+// 	tracing = false;
+//     }
+//     var allchars = fs.readFileSync (fname, 'utf-8');
+//     var result = pre (allchars);
+//     emit (result);
+// }
+// function emit (s) {
+//     console.log (s);
+// }
 
-main ();
+// function getargv (s) {
+//     let r = argv[s];
+//     if (r) {
+// 	return r;
+//     } else {
+// 	return "";
+//     }
+// }
+
+// main ();
 

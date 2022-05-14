@@ -1,46 +1,30 @@
-NODEMODULES=\
-	node_modules/ohm-js \
-	node_modules/yargs \
-	node_modules/atob \
-	node_modules/pako
+prep=./prep/prep
+cwd=`pwd`
+support=--support=${cwd}/support.js
 
-# change this for your own environment
-TOOLS=.
+all: clean main.js
+	node main.js d2f.drawio
 
-all: $(NODEMODULES) tools helloworld.json
+main: main.js
+	node main.js d2f.drawio
 
-node_modules/ohm-js:
-	npm install ohm-js
-node_modules/yargs:
-	npm install yargs
-node_modules/atob:
-	npm install atob
-node_modules/pako:
-	npm install pako
+#	${prep} '.' '$$' drawio.ohm drawio.glue --stop=1 ${support} <d2f.drawio
 
-tools:
-	(cd ./dr ; make)
-	(cd ./prep ; make)
-	(cd ./d2f ; make)
-	(cd ./das2f ; make)
-	(cd ./das2j ; make)
+jslibs:
+	npm install atob pako yargs ohm-js
 
-helloworld.json : tools helloworld.drawio
-	./generate.bash $(TOOLS) helloworld.drawio
+d2f.json: ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio
+	(cd ~/quicklisp/local-projects/d2json/boot/das2json ; make helloworld.json)
+	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio ./d2f.drawio
+	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.json ./d2f.json
+	cp ./d2f.json ../das2json/json2js
+
+d2f.js : d2f.json
+	(cd ../das2json/json2js ; make d2f.js)
+	cp ../das2json/json2js/d2f.js ./d2f.js
+
+main.js: pre.js cos.js d2f.js funcs.js post.js parser.js
+	cat pre.js cos.js d2f.js funcs.js parser.js post.js >main.js
 
 clean:
-	(cd ./dr ; make clean)
-	(cd ./prep ; make clean)
-	(cd ./d2f ; make clean)
-	(cd ./das2f ; make clean)
-	(cd ./das2j ; make clean)
-	rm -f layer*
-	rm -f preprocessed*
-	rm -f duct?_*
-	rm -f out.json
-	rm -rf _*
-	rm -f *~
-
-npmstuff: node_modules/ohm-js node_modules/yargs node_modules/yargs-parser node_modules/atob node_modules/pako
-	npm install ohm-js yargs atob pako
-
+	rm -f d2f.json d2f.js main.js
