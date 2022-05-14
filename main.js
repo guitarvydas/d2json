@@ -719,12 +719,17 @@ function sfsortForPROLOG (text) {
     console.log ('sfsortForPROLOG');
     var sarray = text.split ('\n');
     var sorted = sarray.sort ();
-    return sorted;
+    var str = sorted.join ('\n');
+    return str;
 }
 
 function sfdeleteTrailingSugar (text) {
     console.log ('sfdeleteTrailingSugar');
-    return text;
+    var sarray = text.split ('\n');
+    sarray.forEach (s => s.trim ());
+    var str = sarray.join ('\n');
+    console.log (str);
+    return str;
 }
 
 function sfstyleexpander (xml) {
