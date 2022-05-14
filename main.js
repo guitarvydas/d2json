@@ -728,7 +728,6 @@ function sfstyleexpander (xml) {
 function sfuncompress (rawdrawio) {
 // $prep '.' '$' $d2fdir/drawio.ohm $d2fdir/drawio.glue --stop=1 --support=$d2fdir/support.js <$name
     console.log ('sfuncompress');
-    console.log (rawdrawio);
     var str = prep (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js', 1);
     return str;
 }
@@ -737,8 +736,6 @@ function sfreadfile (fname) {
     console.log ('sfreadfile');
     console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
-    console.log (`sfreadfile len=${bytes.length} type=${typeof bytes}`);
-    console.log (`sfreadfile bytes=\n${bytes}`);
     return bytes;
 }
 //'use strict'
@@ -1166,7 +1163,6 @@ function prep (text, grammarfilename, semanticsfilename, supportfilename, stopco
     argv.support = supportfilename;
     argv.errorview = true;
     stop=stopcount;
-    console.error (argv);
     return pre (text)
 }
 
@@ -1219,16 +1215,10 @@ function prep (text, grammarfilename, semanticsfilename, supportfilename, stopco
 function main () {
     // don't edit this, edit post.js instead
     argv = require('yargs/yargs')(process.argv.slice(2)).argv;
-    console.log (argv);
-    console.log ('main A');
     var d = new d2f (null, "d2f top");
-    console.log ('main B');
     var kstart = d.lookupChild ("kickStart");
-    console.log ('main C');
     kstart.handler (kstart, null);
-    console.log ('main D');
     kstart.container.wakeup ();
-    console.log ('main E');
           // htmlbutton.handler (htmlbutton, null);
           // htmlbutton.container.wakeup ();
           // let outs = testBench.outputs ();

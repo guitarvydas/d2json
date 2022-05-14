@@ -423,7 +423,6 @@ function prep (text, grammarfilename, semanticsfilename, supportfilename, stopco
     argv.support = supportfilename;
     argv.errorview = true;
     stop=stopcount;
-    console.error (argv);
     return pre (text)
 }
 

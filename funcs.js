@@ -32,7 +32,6 @@ function sfstyleexpander (xml) {
 function sfuncompress (rawdrawio) {
 // $prep '.' '$' $d2fdir/drawio.ohm $d2fdir/drawio.glue --stop=1 --support=$d2fdir/support.js <$name
     console.log ('sfuncompress');
-    console.log (rawdrawio);
     var str = prep (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js', 1);
     return str;
 }
@@ -41,7 +40,5 @@ function sfreadfile (fname) {
     console.log ('sfreadfile');
     console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
-    console.log (`sfreadfile len=${bytes.length} type=${typeof bytes}`);
-    console.log (`sfreadfile bytes=\n${bytes}`);
     return bytes;
 }
