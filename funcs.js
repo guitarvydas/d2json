@@ -15,7 +15,8 @@ function sfasfactbase (xml1) {
 
 function sfdeleteblanklines (text) {
     console.log ('sfdeleteblanklines');
-    return text;
+    var rtext = text.replace(/(^[ \t]*\n)/gm, "");
+    return rtext;
 }
 
 function sfsortForPROLOG (text) {
