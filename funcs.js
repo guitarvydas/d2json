@@ -32,7 +32,6 @@ function sfdeleteTrailingSugar (text) {
     var sarray = text.split ('\n');
     sarray.forEach (s => s.trim ());
     var str = sarray.join ('\n');
-    console.log (str);
     return str;
 }
 
