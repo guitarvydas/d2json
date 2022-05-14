@@ -54,3 +54,24 @@ function sfreadfile (fname) {
     var bytes = fs.readFileSync (fname, 'utf-8');
     return bytes;
 }
+
+function sfprolog2json (fb) {
+    // maybe replace this with https://www.npmjs.com/package/tau-prolog?
+
+    const { exec } = require("child_process");
+
+    fs.writeFileSync( 'tempfb.pl', fb);
+
+    exec("swipl -l 'rfb.pl' -g 'exec,halt.'", (error, stdout, stderr) => {
+	if (error) {
+            console.error(`error: ${error.message}`);
+            return;
+	}
+	if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+	}
+	console.error(`stdout: ${stdout}`);
+    });
+    return "done prolog2json";
+}

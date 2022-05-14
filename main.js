@@ -582,6 +582,33 @@ function kickStart (container, instancename) {
 
 
 
+var prolog_convert_to_json_signature = {
+    name: "prolog_convert_to_json",
+    inputs: [{name:"in", structure:["in"]}],
+    outputs: [{name:"out", structure:["out"]}]
+}
+
+
+var prolog_convert_to_json_protoImplementation = {
+    name: "prolog_convert_to_json",
+    kind: "leaf",
+    begin: function () {},
+    finish: function () {},
+    handler: function (me, message) {
+        var x = sfprolog2json (message.data);
+me.send ("out", x, message);
+
+
+    }
+}
+
+function prolog_convert_to_json (container, instancename) {
+    let me = new Leaf (prolog_convert_to_json_signature, prolog_convert_to_json_protoImplementation, container, instancename);
+    return me;
+}
+
+
+
 var finish_signature = {
     name: "finish",
     inputs: [{name:"in", structure:["in"]}],
@@ -623,23 +650,25 @@ function d2f_makechildren (container) {
         var child4 = new sortForPROLOG (container, "sortForPROLOG");
         var child5 = new deleteTrailingSugar (container, "deleteTrailingSugar");
         var child6 = new kickStart (container, "kickStart");
-        var child7 = new finish (container, "finish");
-        var child8 = new styleexpander (container, "styleexpander");
-        var child9 = new uncompress (container, "uncompress");
-      var children = [ {name: "diagramparser", runnable: child1}, {name: "asfactbase", runnable: child2}, {name: "deleteblanklines", runnable: child3}, {name: "sortForPROLOG", runnable: child4}, {name: "deleteTrailingSugar", runnable: child5}, {name: "kickStart", runnable: child6}, {name: "finish", runnable: child7}, {name: "styleexpander", runnable: child8}, {name: "uncompress", runnable: child9} ];
+        var child7 = new prolog_convert_to_json (container, "prolog convert to json");
+        var child8 = new finish (container, "finish");
+        var child9 = new styleexpander (container, "styleexpander");
+        var child10 = new uncompress (container, "uncompress");
+      var children = [ {name: "diagramparser", runnable: child1}, {name: "asfactbase", runnable: child2}, {name: "deleteblanklines", runnable: child3}, {name: "sortForPROLOG", runnable: child4}, {name: "deleteTrailingSugar", runnable: child5}, {name: "kickStart", runnable: child6}, {name: "prolog convert to json", runnable: child7}, {name: "finish", runnable: child8}, {name: "styleexpander", runnable: child9}, {name: "uncompress", runnable: child10} ];
       return children;
 }
 
 function d2f_makeconnections (container) {
-    var conn10 = {sender:{name: "uncompress", etag: "out"}, net: "NIY", receivers:  [{name: "diagramparser", etag: "in"}] };
-    var conn11 = {sender:{name: "diagramparser", etag: "out"}, net: "NIY", receivers:  [{name: "styleexpander", etag: "in"}] };
-    var conn12 = {sender:{name: "styleexpander", etag: "out"}, net: "NIY", receivers:  [{name: "asfactbase", etag: "in"}] };
-    var conn13 = {sender:{name: "asfactbase", etag: "out"}, net: "NIY", receivers:  [{name: "deleteblanklines", etag: "in"}] };
-    var conn14 = {sender:{name: "deleteblanklines", etag: "out"}, net: "NIY", receivers:  [{name: "sortForPROLOG", etag: "in"}] };
-    var conn15 = {sender:{name: "sortForPROLOG", etag: "out"}, net: "NIY", receivers:  [{name: "deleteTrailingSugar", etag: "in"}] };
-    var conn16 = {sender:{name: "kickStart", etag: "out"}, net: "NIY", receivers:  [{name: "uncompress", etag: "in"}] };
-    var conn17 = {sender:{name: "deleteTrailingSugar", etag: "out"}, net: "NIY", receivers:  [{name: "finish", etag: "in"}] };
-    var connections = [ conn10, conn11, conn12, conn13, conn14, conn15, conn16, conn17 ];
+    var conn11 = {sender:{name: "uncompress", etag: "out"}, net: "NIY", receivers:  [{name: "diagramparser", etag: "in"}] };
+    var conn12 = {sender:{name: "diagramparser", etag: "out"}, net: "NIY", receivers:  [{name: "styleexpander", etag: "in"}] };
+    var conn13 = {sender:{name: "styleexpander", etag: "out"}, net: "NIY", receivers:  [{name: "asfactbase", etag: "in"}] };
+    var conn14 = {sender:{name: "asfactbase", etag: "out"}, net: "NIY", receivers:  [{name: "deleteblanklines", etag: "in"}] };
+    var conn15 = {sender:{name: "deleteblanklines", etag: "out"}, net: "NIY", receivers:  [{name: "sortForPROLOG", etag: "in"}] };
+    var conn16 = {sender:{name: "sortForPROLOG", etag: "out"}, net: "NIY", receivers:  [{name: "deleteTrailingSugar", etag: "in"}] };
+    var conn17 = {sender:{name: "kickStart", etag: "out"}, net: "NIY", receivers:  [{name: "uncompress", etag: "in"}] };
+    var conn18 = {sender:{name: "deleteTrailingSugar", etag: "out"}, net: "NIY", receivers:  [{name: "prolog convert to json", etag: "in"}] };
+    var conn19 = {sender:{name: "prolog convert to json", etag: "out"}, net: "NIY", receivers:  [{name: "finish", etag: "in"}] };
+    var connections = [ conn11, conn12, conn13, conn14, conn15, conn16, conn17, conn18, conn19 ];
     return connections;
 }
 
@@ -777,6 +806,27 @@ function sfreadfile (fname) {
     console.log ('sfreadfile');
     var bytes = fs.readFileSync (fname, 'utf-8');
     return bytes;
+}
+
+function sfprolog2json (fb) {
+    // maybe replace this with https://www.npmjs.com/package/tau-prolog?
+
+    const { exec } = require("child_process");
+
+    fs.writeFileSync( 'tempfb.pl', fb);
+
+    exec("swipl -l 'rfb.pl' -g 'exec,halt.'", (error, stdout, stderr) => {
+	if (error) {
+            console.error(`error: ${error.message}`);
+            return;
+	}
+	if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+	}
+	console.error(`stdout: ${stdout}`);
+    });
+    return "done prolog2json";
 }
 //'use strict'
 

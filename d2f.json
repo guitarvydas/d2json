@@ -71,6 +71,17 @@
       "connections": [],
       "id":"cell_46",
       "inputs": ["in" ],
+      "name":"prolog convert to json",
+      "outputs": ["out" ],
+      "synccode":"var x = sfprolog2json (message.data);&lt;br&gt;me.send (&quot;out&quot;, x, message);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
+    }
+  ],
+  [
+    {
+      "children": [],
+      "connections": [],
+      "id":"cell_49",
+      "inputs": ["in" ],
       "name":"finish",
       "outputs": [],
       "synccode":"console.log (message.data);&lt;br&gt;&lt;div&gt;&lt;/div&gt;"
@@ -85,6 +96,7 @@
 	"sortForPROLOG",
 	"deleteTrailingSugar",
 	"kickStart",
+	"prolog convert to json",
 	"finish",
 	"styleexpander",
 	"uncompress"
@@ -119,8 +131,12 @@
 	  "senders": [ {"sender": {"component":"kickStart", "port":"out"}} ]
 	},
 	{
-	  "receivers": [ {"receiver": {"component":"finish", "port":"in"}} ],
+	  "receivers": [ {"receiver": {"component":"prolog convert to json", "port":"in"}} ],
 	  "senders": [ {"sender": {"component":"deleteTrailingSugar", "port":"out"}} ]
+	},
+	{
+	  "receivers": [ {"receiver": {"component":"finish", "port":"in"}} ],
+	  "senders": [ {"sender": {"component":"prolog convert to json", "port":"out"}} ]
 	}
       ],
       "id":"cell_6",
