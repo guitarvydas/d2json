@@ -2,6 +2,7 @@
 
 exec :-
     consult("tempfb.pl"),
-    json_write(user_output,"swipl jsonized",[width(128)]).
+    bagof([R,S,O],diagram_fact(R,S,O),Bag),
+    json_write(user_output,Bag,[width(128)]).
 
 
