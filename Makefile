@@ -10,7 +10,7 @@ all: main.js
 jslibs:
 	npm install atob pako yargs ohm-js
 
-d2f.json: ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.json
+d2f.json: ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio
 	(cd ~/quicklisp/local-projects/d2json/boot/das2json ; make helloworld.json)
 	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio ./d2f.drawio
 	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.json ./d2f.json
@@ -23,3 +23,5 @@ d2f.js : d2f.json
 main.js: pre.js cos.js d2f.js funcs.js post.js parser.js
 	cat pre.js cos.js d2f.js funcs.js parser.js post.js >main.js
 
+clean:
+	rm -f d2f.json d2f.js main.js
