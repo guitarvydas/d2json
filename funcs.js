@@ -71,7 +71,7 @@ function sfprolog2json (fb) {
             console.error(`stderr: ${stderr}`);
             return;
 	}
-	console.error(`stdout: ${stdout}`);
+	console.error(stdout);
     });
     return "done prolog2json";
 }

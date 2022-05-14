@@ -821,7 +821,7 @@ diagram_fact(y, cell_49, 1440).
 diagram_fact(y, cell_50, 1485).
 diagram_fact(y, cell_51, 1485).
 diagram_fact(y, cell_53, 1245).
-diagram_fact(y, cell_6, 90).
+diagram_fact(y, cell_6, 70).
 diagram_fact(y, cell_7, 570).
 diagram_fact(y, cell_8, 340).
 diagram_fact(y, cell_9, 385).

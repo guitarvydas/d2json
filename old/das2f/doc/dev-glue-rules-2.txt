@@ -1,3 +1,0 @@
-Parameters
-   [@sharp kparameters anythingToEOL @identifier]
-  = sharp+ "parameters" #(anythingToEOL) identifier+
