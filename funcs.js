@@ -49,7 +49,5 @@ function sfreadfile (fname) {
     console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
     console.log (`sfreadfile len=${bytes.length} type=${typeof bytes}`);
-    var data = atob (bytes);
-    console.log (`sfreadfile atob data len=${data.length} type=${typeof data}`)
     return bytes;
 }

@@ -13,7 +13,7 @@ jslibs:
 d2f.json: ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.json
 	(cd ~/quicklisp/local-projects/d2json/boot/das2json ; make helloworld.json)
 	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.drawio ./d2f.drawio
-	cp ~/quicklisp/local-projects/d2json/bootw/das2json/helloworld.json ./d2f.json
+	cp ~/quicklisp/local-projects/d2json/boot/das2json/helloworld.json ./d2f.json
 	cp ./d2f.json ../das2json/json2js
 
 d2f.js : d2f.json
