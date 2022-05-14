@@ -8,7 +8,9 @@ function sfdiagramparser (xml) {
 
 function sfasfactbase (xml1) {
     console.log ('sfasfactbase');
-    return xml1;
+//     | $prep '.' '$' $d2fdir/factbase.ohm $d2fdir/factbase.glue --stop=1 --support=$d2fdir/support.js \
+    var fb = prep (xml1, 'factbase.ohm', 'factbase.glue', './support.js', 1);
+    return fb;
 }
 
 function sfdeleteblanklines (text) {
