@@ -28,7 +28,9 @@ function sfdeleteTrailingSugar (text) {
 
 function sfstyleexpander (xml) {
     console.log ('sfstyleexpander');
-    return xml;
+// | $prep '.' '$' $d2fdir/styleexpander.ohm $d2fdir/styleexpander.glue --stop=1 --support=$d2fdir/support.js \
+    var rxml = prep (xml, 'styleexpander.ohm', 'styleexpander.glue', './support.js', 1);
+    return rxml;
 }
 
 function sfuncompress (rawdrawio) {
