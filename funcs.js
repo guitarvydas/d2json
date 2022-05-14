@@ -2,8 +2,8 @@
 function sfdiagramparser (xml) {
     console.log ('sfdiagramparser');
 //     | $prep '.' '$' $d2fdir/diagram.ohm $d2fdir/diagram.glue --stop=1 --support=$d2fdir/support.js \
-//    var xml = prep (xml, 'diagram.ohm', 'diagram.glue', './support.js', 1);
-    return xml;
+    var rxml = prep (xml, 'diagram.ohm', 'diagram.glue', './support.js', 1);
+    return rxml;
 }
 
 function sfasfactbase (xml1) {
