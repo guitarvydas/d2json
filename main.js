@@ -727,16 +727,9 @@ function sfstyleexpander (xml) {
 
 function sfuncompress (rawdrawio) {
 // $prep '.' '$' $d2fdir/drawio.ohm $d2fdir/drawio.glue --stop=1 --support=$d2fdir/support.js <$name
-
-    var str = prep (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js');
-
-    // console.log (`uncompress len=${rawdrawio.length} ${typeof rawdrawio}`)
-    // var data = atob (rawdrawio);
-    // console.log (`atob data len=${data.length}`)
-    // var inf = pako.inflateRaw (
-    // 	Uint8Array.from (data, c=>c.charCodeAt (0)), {to: 'string'})
-    // var str = decodeURIComponent (inf);
-
+    console.log ('sfuncompress');
+    console.log (rawdrawio);
+    var str = prep (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js', 1);
     return str;
 }
 
@@ -745,6 +738,7 @@ function sfreadfile (fname) {
     console.log (fname);
     var bytes = fs.readFileSync (fname, 'utf-8');
     console.log (`sfreadfile len=${bytes.length} type=${typeof bytes}`);
+    console.log (`sfreadfile bytes=\n${bytes}`);
     return bytes;
 }
 //'use strict'
@@ -1167,9 +1161,11 @@ function pre (allchars) {
     return expanded;
 }
 
-function prep (text, grammarfilename, semanticsfilename, supportfilename) {
+function prep (text, grammarfilename, semanticsfilename, supportfilename, stopcount) {
     argv._ = ['.', '$', grammarfilename, semanticsfilename];
     argv.support = supportfilename;
+    argv.errorview = true;
+    stop=stopcount;
     console.error (argv);
     return pre (text)
 }

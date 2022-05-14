@@ -418,9 +418,11 @@ function pre (allchars) {
     return expanded;
 }
 
-function prep (text, grammarfilename, semanticsfilename, supportfilename) {
+function prep (text, grammarfilename, semanticsfilename, supportfilename, stopcount) {
     argv._ = ['.', '$', grammarfilename, semanticsfilename];
     argv.support = supportfilename;
+    argv.errorview = true;
+    stop=stopcount;
     console.error (argv);
     return pre (text)
 }
