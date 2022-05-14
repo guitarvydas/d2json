@@ -2,7 +2,10 @@ prep=./prep/prep
 cwd=`pwd`
 support=--support=${cwd}/support.js
 
-all: main.js
+all: clean main.js
+	node main.js d2f.drawio
+
+main: main.js
 	node main.js d2f.drawio
 
 #	${prep} '.' '$$' drawio.ohm drawio.glue --stop=1 ${support} <d2f.drawio
