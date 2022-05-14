@@ -728,7 +728,7 @@ function sfstyleexpander (xml) {
 function sfuncompress (rawdrawio) {
 // $prep '.' '$' $d2fdir/drawio.ohm $d2fdir/drawio.glue --stop=1 --support=$d2fdir/support.js <$name
 
-    var str = parsewhole (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js');
+    var str = prep (rawdrawio, 'drawio.ohm', 'drawio.glue', './support.js');
 
     // console.log (`uncompress len=${rawdrawio.length} ${typeof rawdrawio}`)
     // var data = atob (rawdrawio);
@@ -1167,7 +1167,7 @@ function pre (allchars) {
     return expanded;
 }
 
-function parsewhole (text, grammarfilename, semanticsfilename, supportfilename) {
+function prep (text, grammarfilename, semanticsfilename, supportfilename) {
     argv._ = ['.', '$', grammarfilename, semanticsfilename];
     argv.support = supportfilename;
     console.error (argv);

@@ -418,7 +418,7 @@ function pre (allchars) {
     return expanded;
 }
 
-function parsewhole (text, grammarfilename, semanticsfilename, supportfilename) {
+function prep (text, grammarfilename, semanticsfilename, supportfilename) {
     argv._ = ['.', '$', grammarfilename, semanticsfilename];
     argv.support = supportfilename;
     console.error (argv);
