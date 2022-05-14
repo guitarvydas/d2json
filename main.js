@@ -712,13 +712,14 @@ function sfasfactbase (xml1) {
 function sfdeleteblanklines (text) {
     console.log ('sfdeleteblanklines');
     var rtext = text.replace(/(^[ \t]*\n)/gm, "");
-    console.log (rtext);
     return rtext;
 }
 
 function sfsortForPROLOG (text) {
     console.log ('sfsortForPROLOG');
-    return text;
+    var sarray = text.split ('\n');
+    var sorted = sarray.sort ();
+    return sorted;
 }
 
 function sfdeleteTrailingSugar (text) {

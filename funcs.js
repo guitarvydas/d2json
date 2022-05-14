@@ -21,7 +21,9 @@ function sfdeleteblanklines (text) {
 
 function sfsortForPROLOG (text) {
     console.log ('sfsortForPROLOG');
-    return text;
+    var sarray = text.split ('\n');
+    var sorted = sarray.sort ();
+    return sorted;
 }
 
 function sfdeleteTrailingSugar (text) {
